@@ -1,0 +1,17 @@
+os: windows
+addons:
+  artifacts: true
+deploy:
+  'on':
+    tags: false
+    all_branches: true
+  file: output.tar.gz
+  api_key: $APIKEY
+  provider: releases
+  skip_cleanup: true
+install:
+- npm install
+- tar -cvzf output.tar.gz *
+node_js:
+- '12'
+language: node_js
