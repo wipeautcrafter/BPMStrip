@@ -11,6 +11,7 @@
   "dependencies": {
     "music-beat-detector": "^0.1.1",
     "naudiodon": "^2.1.2",
+    "lame": "^1.2.4",
     "prompt": "^1.0.0"
   }
 }

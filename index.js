@@ -1,4 +1,5 @@
 const portAudio = require("naudiodon");
+const lame = require("lame");
 const prompt = require("prompt");
 const analyze = require("./analyze.js");
 
@@ -17,6 +18,18 @@ let ai = new portAudio.AudioIO({
   }
 });
 
+const encoder = new lame.Encoder({
+  // in
+  channels: 2,
+  bitDepth: 16,
+  sampleRate: 48000,
+
+  // out
+  bitRate: 128,
+  outSampleRate: 22050,
+  mode: lame.STEREO
+});
+
 prompt.start();
 
 prompt.get("ip", (err, res) => {
@@ -24,12 +37,7 @@ prompt.get("ip", (err, res) => {
 
   console.log("[BPMSTRIP] Started listening on Stereo Mix.");
 
-  const closeAnalyzer = analyze(ai, res.ip);
+  ai.pipe(encoder);
+  analyze(encoder, res.ip);
   ai.start();
-
-  process.on('SIGINT', () => {
-    console.log("[BPMSTRIP] Stopped listening. Goodbye!");
-    ai.quit();
-    if(closeAnalyzer) closeAnalyzer();
-  });
 });
