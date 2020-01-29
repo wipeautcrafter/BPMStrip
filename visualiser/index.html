@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Visualiser</title>
+    <script src="http://127.0.0.1:3000/socket.io/socket.io.js" charset="utf-8"></script>
+  </head>
+  <body></body>
+  <script>
+  const socket = io();
+  socket.on("hit", function() {
+    console.log("hit");
+    document.body.style.background = "white";
+    setTimeout(() => document.body.style.background = "black", 50);
+  });
+  </script>
+</html>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    transition: background 1s ease-in-out;
+  }
+</style>

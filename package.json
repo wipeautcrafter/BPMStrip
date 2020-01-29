@@ -9,6 +9,8 @@
   "author": "wipeaut",
   "license": "ISC",
   "dependencies": {
-    "naudiodon": "^2.1.2"
+    "music-beat-detector": "^0.1.1",
+    "naudiodon": "^2.1.2",
+    "prompt": "^1.0.0"
   }
 }
